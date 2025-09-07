@@ -1,0 +1,73 @@
+<!-- navbar.html -->
+<style>
+  .hover-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #e5e7eb;   /* light text underline */
+    left: 0;
+    bottom: -2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s ease;
+  }
+  .hover-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Always dark mode styling */
+  header {
+    background-color: #000 !important;
+    border-bottom: 1px solid white !important;
+  }
+  header a,
+  nav a {
+    color: #e5e7eb !important;
+  }
+  .hover-underline::after {
+    background-color: #e5e7eb !important;
+  }
+  body {
+    background-color: #000 !important;
+    color: #e5e7eb !important;
+  }
+</style>
+
+<header class="fixed w-full z-20">
+  <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-end">
+    <!-- Top-left title -->
+    <a href="README.html"
+       class="inline-flex items-end justify-center font-semibold tracking-widest text-2xl">
+      <span class="hover-underline">StillMind</span>
+      <span aria-label="meditation emoji" role="img"
+            style="font-size:1.25rem;position:relative;top:-0.7rem;margin-left:0.15rem">🧘‍♀️</span>
+    </a>
+
+    <!-- Top-right nav links -->
+    <nav class="space-x-6 flex text-xs tracking-wider">
+      <a href="aboutus.html" class="inline-flex items-center font-semibold" style="font-size:1.125rem">
+        <span class="hover-underline">Research Hub</span>
+        <span aria-label="lotus emoji" role="img"
+              style="font-size:1.0rem;position:relative;top:-0.6rem;margin-left:0.15rem">🔗📖</span>
+      </a>
+      <a href="innovations.html" class="inline-flex items-center font-semibold" style="font-size:1.125rem">
+        <span class="hover-underline">Innovations</span>
+        <span aria-label="light bulb emoji" role="img"
+              style="font-size:1rem;position:relative;top:-0.6rem;margin-left:0.15rem">💡</span>
+      </a>
+      <a href="future.html" class="inline-flex items-center font-semibold" style="font-size:1.125rem">
+        <span class="hover-underline">Future</span>
+        <span aria-label="chart emoji" role="img"
+              style="font-size:1rem;position:relative;top:-0.6rem;margin-left:0.15rem">📈</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer -->
+<div style="height: 64px;"></div>

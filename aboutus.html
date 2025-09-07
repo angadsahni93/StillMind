@@ -1,0 +1,192 @@
+<!-- aboutus.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Hub | StillMind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-400 font-light tracking-wide text-sm leading-relaxed">
+
+  <!-- Navbar placeholder -->
+  <header>
+    <div id="navbar-placeholder"></div>
+  </header>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+  </script>
+
+  <!-- Research Hub Content -->
+  <main class="pt-10 pb-24 px-6 max-w-5xl mx-auto space-y-0 text-center">
+
+
+  <section class="bg-gray-50 rounded-2xl shadow-sm p-6 max-w-sm mx-auto text-center space-y-4">
+    <h2 class="text-4xl text-gray-500 font-semibold tracking-wider">
+      Research Hub
+      <span style="font-size: 2rem; position: relative; top: -1.2rem; margin-left: 0.15rem;" aria-label="lotus emoji" role="img">🔗📖</span>
+    </h2>
+   </section>
+
+<br>
+
+<section class="bg-gray-50 rounded-2xl shadow-sm p-6 max-w-3xl mx-auto text-left space-y-4">
+    <p class="max-w-3xl mx-auto text-left text-gray-600"> 
+      At <span class="italic text-black-900">StillMind</span>, we explore how digital technology can revolutionize mental healthcare for young people. 
+
+<br><br>
+
+     We discuss Research into <strong class="text-gray-900">Depression</strong> as it is the is amongst the leading causes of disability in young people <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30925-9/fulltext" class="text-blue-500 hover:bg-blue-200 hover:underline transition-colors" 
+target="_blank" rel="noopener noreferrer">(Vos et al., 2020)</a>.
+</p>
+</section>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <!-- Spider Diagram -->
+  <section class="flex justify-center my-12">
+    <svg viewBox="0 0 600 600" class="w-full max-w-4xl">
+      <!-- Lines first (so they sit behind circles) -->
+      <line x1="300" y1="300" x2="150" y2="180" stroke="#34c5c1" stroke-width="2" opacity="0"/> // Left Upper Quadrant
+      <line x1="150" y1="180" x2="90" y2="100" stroke="#a3efea" stroke-width="2"/>
+      <line x1="150" y1="180" x2="210" y2="100" stroke="#a3efea" stroke-width="2"/>
+
+      <line x1="300" y1="700" x2="150" y2="580" stroke="#34c5c1" stroke-width="2" opacity="0"/> // Left Lower Quadrant
+      <line x1="150" y1="400" x2="90" y2="480" stroke="#FFE4B5" stroke-width="2"/>
+      <line x1="210" y1="480" x2="150" y2="400" stroke="#FFE4B5" stroke-width="2"/>
+
+      <line x1="300" y1="300" x2="470" y2="180" stroke="#f44336" stroke-width="2" opacity="0"/> // Upper Quadrant
+      <line x1="470" y1="180" x2="530" y2="100" stroke="#ffab91" stroke-width="2"/>
+      <line x1="470" y1="180" x2="410" y2="100" stroke="#ffab91" stroke-width="2"/>
+      <!-- (you can extend with more branches for other quadrants later) -->
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+      <!-- Center circle -->
+      <svg width="600" height="600" viewBox="0 0 600 600">
+
+<!-- Ripple animation circle 0 -->
+  <circle cx="300" cy="300" r="70" fill="none" stroke="gold" stroke-width="8" opacity="0.4">
+    <!--<animate attributeName="r" from="70" to="250" dur="8s" repeatCount="indefinite" />
+    //<animate attributeName="opacity" values="0.3;0;0" keyTimes="0;0.7;1" dur="8s" repeatCount="indefinite" />-->
+  </circle>
+
+
+  <!-- Ripple animation circle 1 -->
+  <circle cx="300" cy="300" r="70" fill="gold" stroke="yellow" stroke-width="18" opacity="0.6">
+    <animate attributeName="r" from="70" to="180" dur="10s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.6;0.2;0" keyTimes="0;0.9;1" dur="10s" repeatCount="indefinite" />
+  </circle>
+
+
+  <!-- Ripple animation circle 1.2 -->
+  <circle cx="300" cy="300" r="70" fill="lightyellow" stroke="gold" stroke-width="8" opacity="0.5">
+    <animate attributeName="r" from="70" to="250" dur="10s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.5;0.3;0" keyTimes="0;0.9;1" dur="10s" repeatCount="indefinite" />
+  </circle>
+
+
+
+<!-- More static circles -->
+<svg width="600" height="600" viewBox="0 0 600 600">
+
+<circle cx="300" cy="300" r="200" fill="gold" stroke="yellow" stroke-width="30" opacity="0.2"/>
+
+<circle cx="300" cy="300" r="200" fill="none" stroke="beige" stroke-width="80" opacity="0.1"/>
+
+
+</svg>
+
+
+  <!-- Main circle -->
+<svg width="600" height="600" viewBox="0 0 600 600">
+  <circle cx="300" cy="300" r="70" fill="beige" stroke="gold" stroke-width="0" opacity="0.2">
+  <!--<animate attributeName="opacity" values="1;0.8;0.6;0.4;0.2;0.4;0.6;0.8;0.9;0.95;1" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="10s" repeatCount="indefinite" />
+  <animate attributeName="r" values="70;85;94;100;102;90;80;68;63;60;70" keyTimes="0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1" dur="10s" repeatCount="indefinite" />-->
+  </circle>
+</svg>
+
+      <text x="300" y="270" text-anchor="middle" class="fill-white text-xl font-semibold">
+       <tspan x="300" dy="60" font-size="100" aria-label="research" role="img">🧘‍♀️</tspan>
+      </text>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+      <!-- Left Upper Quadrant -->
+      <a>
+        <circle cx="150" cy="180" r="45" fill="#34c5c1"/>
+        <text x="150" y="180" text-anchor="middle" class="fill-white text-sm font-bold">
+          Research<tspan x="150" dy="35" font-size="36" aria-label="research" role="img">🧠</tspan>
+        </text>
+      </a>
+
+      <a href="costeffectiveness.html">
+        <circle cx="90" cy="100" r="45" fill="#a3efea"/>
+        <text x="90" y="90" text-anchor="middle" class="fill-gray-700 text-xs">Cost-</text>
+        <text x="93" y="105" text-anchor="middle" class="fill-gray-700 text-xs">Effectiveness
+        <tspan x="90" dy="30" font-size="30" aria-label="money" role="img">💰</tspan></text>
+      </a>
+
+      <a href="depression.html">
+        <circle cx="210" cy="100" r="38" fill="#a3efea"/>
+        <text x="213" y="100" text-anchor="middle" class="fill-gray-700" style="font-size: 12px">Depression
+      <tspan x="210" dy="30" font-size="27" aria-label="sad" role="img">🥀</tspan></text>
+      </a>
+
+
+      <!-- Left Lower Quadrant -->
+      <a>
+        <circle cx="150" cy="400" r="45" fill="#FFB84D"/>
+        <text x="150" y="386" text-anchor="middle" class="fill-white text-sm font-bold">Mentally</text> 
+        <text x="150" y="401" text-anchor="middle" class="fill-white text-sm font-bold">Healthy
+        <tspan x="150" dy="36" font-size="36" aria-label="research" role="img">🔥</tspan>
+        </text>
+      </a>
+
+      <a href="productivity.html">
+        <circle cx="90" cy="480" r="40" fill="#FFE4B5"/>
+        <text x="93" y="475" text-anchor="middle" class="fill-gray-700 text-xs">
+        Productivity
+        <tspan x="90" dy="28" font-size="25" aria-label="money" role="img">🌟</tspan></text>
+      </a>
+
+      <a href="wellbeing.html">
+        <circle cx="210" cy="480" r="40" fill="#FFE4B5"/>
+        <text x="213" y="475" text-anchor="middle" class="fill-gray-700" style="font-size: 12px">
+        Well-Being
+        <tspan x="210" dy="25" font-size="25" aria-label="sad" role="img">🌸</tspan></text>
+      </a>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+      <!-- Right Upper Quadrant -->
+      <a>
+        <circle cx="470" cy="180" r="45" fill="#f44336"/>
+        <text x="470" y="170" text-anchor="middle" class="fill-white text-sm font-semibold">Apps
+      <tspan x="465" dy="40" font-size="32" aria-label="research" role="img">📲</tspan></text>
+      </a>
+
+      <a href="artist.html">
+        <circle cx="530" cy="100" r="35" fill="#ffab91"/>
+        <text x="530" y="105" text-anchor="middle" class="fill-gray-700 text-xs">Artist</text>
+      </a>
+
+      <a href="appdev.html">
+        <circle cx="410" cy="100" r="45" fill="#ffab91"/>
+        <text x="410" y="85" text-anchor="middle" class="fill-gray-700 text-xs">App</text>
+        <text x="410" y="100" text-anchor="middle" class="fill-gray-700 text-xs">Development
+        <tspan x="410" dy="34" font-size="35" aria-label="money" role="img">🚀</tspan></text>
+      </a>
+
+    </svg>
+  </section>
+  </main>
+
+  <footer class="text-center text-xs text-gray-300 py-8 border-t border-gray-200 mt-10">
+    © 2025 StillMind. All rights reserved.
+  </footer>
+
+</body>
+</html>

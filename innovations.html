@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Innovations | StillMind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-400 font-light tracking-wide text-sm leading-relaxed">
+
+  <!-- Navbar placeholder -->
+  <header>
+    <div id="navbar-placeholder"></div>
+  </header>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+  </script>
+
+  <!-- Innovations Content -->
+  <main class="pt-10 pb-24 px-6 max-w-3xl mx-auto space-y-10 text-left">
+    <h2 class="text-4xl text-gray-500 font-semibold tracking-wider">
+      Innovations
+      <span style="font-size: 2rem; position: relative; top: -1.2rem; margin-left: 0.15rem;" aria-label="light bulb emoji" role="img">💡</span>
+    </h2>
+    <p>
+      At <span class="italic text-gray-500">StillMind</span>, we use carefully designed digital tools to better understand youth mental health. Our research combines technology and compassion to capture insights that matter.
+    </p>
+
+    <h3 class="text-xl text-gray-400 font-light tracking-wide">🔍 Focused and Gentle Methods</h3>
+    <p>
+      From mobile surveys to passive sensing, our methods aim to gather data with minimal intrusion, prioritizing the comfort and consent of young participants.
+    </p>
+
+    <blockquote class="text-gray-300 italic border-l-4 border-gray-200 pl-4 text-sm">
+      "Technology in service of gentle understanding."
+    </blockquote>
+  </main>
+
+  <footer class="text-center text-xs text-gray-300 py-8 border-t border-gray-200 mt-10">
+    © 2025 StillMind. All rights reserved.
+  </footer>
+
+</body>
+</html>

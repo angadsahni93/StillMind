@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StillMind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* ---------------- Animations ---------------- */
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { box-shadow: 0 0 12px rgba(96, 165, 250, 0.3); }
+      50% { box-shadow: 0 0 400px rgba(96, 165, 250, 30); }
+    }
+
+    @keyframes floatBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-40px); }
+    }
+
+    @keyframes colorCycle {
+      0% { background-color: #93c5fd; }
+      10% { background-color: #a5b4fc; }
+      20% { background-color: #fbbf24; }
+      30% { background-color: #f87171; }
+      40% { background-color: #34d399; }
+      50% { background-color: #60a5fa; }
+      60% { background-color: #f472b6; }
+      70% { background-color: #fcd34d; }
+      80% { background-color: #4ade80; }
+      90% { background-color: #818cf8; }
+      100% { background-color: #93c5fd; }
+    }
+
+    @keyframes orbit1 {
+      0% { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+    }
+
+    @keyframes orbit2 {
+      0% { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+    }
+
+    @keyframes moonOrbit1 {
+      0% { transform: rotate(0deg) translateX(12px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(12px) rotate(-360deg); }
+    }
+
+    @keyframes moonOrbit2 {
+      0% { transform: rotate(0deg) translateX(16px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(16px) rotate(-360deg); }
+    }
+
+    @keyframes starOrbit {
+      0% { transform: rotate(0deg) translateX(110px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(110px) rotate(-360deg); }
+    }
+
+    @keyframes starSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ---------------- Breathing Orb ---------------- */
+    .breathing-orb {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 9999px;
+      margin: 0 auto;
+      z-index: 10; /* orb always in front */
+      animation: breathe 6s ease-in-out infinite,
+                 shimmer 4s ease-in-out infinite,
+                 colorCycle 30s linear infinite,
+                 floatBounce 4s ease-in-out infinite;
+      background-color: #93c5fd;
+      box-shadow: 0 0 20px rgba(253, 186, 116, 0.4),
+                  0 0 60px rgba(253, 186, 116, 0.3);
+    }
+
+    .orb-emoji {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 7rem;
+      pointer-events: none;
+      user-select: none;
+      z-index: 15;
+    }
+
+    .breathing-orb::before,
+    .breathing-orb::after {
+      content: "";
+      position: absolute;
+      border: 1px solid #999;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0; /* behind orb */
+    }
+
+    .breathing-orb::before { width: 140px; height: 140px; }
+    .breathing-orb::after { width: 180px; height: 180px; }
+
+    /* ---------------- Orbiting Dots ---------------- */
+    .orbiting-dot {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      margin: -8px 0 0 -8px;
+      pointer-events: none;
+      animation-timing-function: quintic;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+      z-index: 5; /* between orb and rings */
+      background-color: #93c5fd;
+      border: 1px solid #4b5563;
+    }
+    .orbiting-dot.ring1 { animation: orbit1 8s linear infinite; transform-origin: 70px 0; }
+    .orbiting-dot.ring2 { animation: orbit2 12s linear infinite; transform-origin: 90px 0; }
+
+    /* ---------------- Moons ---------------- */
+    .moon {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      margin: -3px 0 0 -3px;
+      pointer-events: none;
+      box-shadow: 0 0 3px rgba(0,0,0,0.3);
+      z-index: 5; /* same as dots */
+      background-color: white;
+      border: 0.5px solid #4b5563;
+    }
+    .ring1 .moon { animation: moonOrbit1 3s linear infinite; transform-origin: 12px 0; }
+    .ring2 .moon { animation: moonOrbit2 4s linear infinite; transform-origin: 16px 0; }
+
+    /* ---------------- Orbit Rings ---------------- */
+    .orbit-ring { 
+      position: absolute; 
+      border: 1px solid rgba(0,0,0,0.3); 
+      border-radius: 50%; 
+      top: 50%; 
+      left: 50%; 
+      pointer-events: none; 
+      transform: translate(-50%, -50%); 
+      z-index: 0; /* behind orb and moons */
+      border: 1px solid white;
+    }
+    .ring1 .orbit-ring { width: 24px; height: 24px; }
+    .ring2 .orbit-ring { width: 32px; height: 32px; }
+
+    .orbit-ring-large {
+      position: absolute;
+      border: 1px solid gold;
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      box-shadow: 0 0 800px gold, inset 0 0 100px gold;
+      z-index: 0; /* behind orb */
+    }
+
+    /* ---------------- Orbiting Star ---------------- */
+    .orbiting-star {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      margin: -10px 0 0 -10px;
+      animation: starOrbit 18s linear infinite;
+      transform-origin: 110px 0;
+      z-index: 10; /* above rings */
+    }
+    .orbiting-star .star-spin {
+      width: 100%;
+      height: 100%;
+      background-color: gold;
+      clip-path: polygon(
+        50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+        50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+      );
+      box-shadow: 0 0 8px gold;
+      animation: starSpin 3s linear infinite;
+      transform-origin: 50% 50%;
+    }
+
+    /* ---------------- Dark Mode ---------------- */
+    @media (prefers-color-scheme: dark) {
+      .breathing-orb::before,
+      .breathing-orb::after { border-color: #999; }
+      .orbit-ring { border-color: rgba(200,200,200,0.6); }
+      .orbit-ring-large { border-color: gold; box-shadow: 0 0 1000px gold, inset 0 0 100px gold; }
+      .orbiting-dot { background-color: #f3f4f6; border: 1px solid #ddd; box-shadow: 0 0 6px rgba(255,255,255,0.5); }
+      .moon { background-color: #e5e7eb; border: 0.5px solid #bbb; box-shadow: 0 0 3px rgba(255,255,255,0.5); }
+    }
+
+  </style>
+</head>
+<body class="bg-white text-gray-400 font-light tracking-wide text-sm leading-relaxed">
+
+  <!-- Navbar -->
+  <header>
+    <div id="navbar-placeholder"></div>
+  </header>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('navbar-placeholder').innerHTML = data);
+  </script>
+
+  <!-- Hero Section -->
+  <section class="pt-10 pb-24 text-center">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="font-extralight text-gray-500 mb-4 tracking-wide inline-flex items-center justify-center" style="font-size: 4rem;">
+        StillMind
+      </h2>
+
+      <br><br>
+
+      <!-- Breathing Orb Animation -->
+      <div class="breathing-orb"> 
+        <span class="orb-emoji" aria-label="meditation emoji" role="img">🧘‍♀️</span>
+
+        <div class="orbiting-dot ring1">
+          <div class="orbit-ring"></div>
+          <div class="moon"></div>
+        </div>
+        <div class="orbiting-dot ring2">
+          <div class="orbit-ring"></div>
+          <div class="moon"></div>
+        </div>
+
+        <div class="orbit-ring-large"></div>
+
+        <div class="orbiting-star">
+          <div class="star-spin"></div> 
+        </div> 
+      
+</div>
+
+      <br><br>
+
+      <p class="text-gray-600 text-sm font-light leading-snug">
+        Exploring How Digital Technology is Transforming<br>
+        <span class="text-sm text-gray-400">Mental Health Support for</span><br> 
+        <span class="text-sm text-gray-300">Young People</span>
+      </p>
+    </div>
+
+<br><br>
+<br><br>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-gray-300 py-8 border-t border-gray-200 mt-10">
+    © 2025 StillMind. All rights reserved.
+  </footer>
+</body>
+</html>
+
