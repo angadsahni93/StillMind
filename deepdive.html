@@ -1,0 +1,202 @@
+<!-- deepdive.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deep Dive | StillMind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Include WordCloud2.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.1.2/src/wordcloud2.min.js"></script>
+</head>
+<body class="bg-white text-gray-400 font-light tracking-wide text-sm leading-relaxed">
+
+  <!-- Navbar placeholder -->
+  <header>
+    <div id="navbar-placeholder"></div>
+  </header>
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      });
+  </script>
+
+  <!-- Page Content -->
+  <main class="pt-10 pb-24 px-6 max-w-4xl mx-auto space-y-10 text-center">
+
+    <!-- Heading with Back Button -->
+    <div class="flex items-center justify-left space-x-4 mb-6">
+      <a href="aboutus.html" class="bg-yellow-300 text-gray-700 font-semibold py-2 px-4 rounded-2xl hover:bg-blue-400 hover:text-white transition-colors">
+        <span aria-label="lotus" role="img" style="font-size:2rem;position:relative;top:0.1rem">← 🔗📖</span>
+      </a>
+
+<section class="bg-gray-50 rounded-2xl shadow-sm p-6 max-w-3xl mx-auto text-left space-y-4">
+      <h2 class="text-4xl text-gray-500 font-semibold tracking-wider flex items-center">
+        Deep Dive
+        <span style="font-size: 3rem; margin-left: 0.15rem;" aria-label="sad" role="img">🔎📄</span>
+      </h2>
+</section>
+    </div>
+
+    <!-- Mission Statement Section -->
+    <section class="bg-gray-50 rounded-2xl shadow-sm p-6 max-w-3xl mx-auto text-left space-y-4">
+      <h3 class="text-xl text-gray-600 font-semibold">Mission Statement</h3>
+      <p class="text-gray-500">
+        TBD.<br>
+      </p>
+      <h3 class="text-m text-gray-600 font-semibold">
+        Question: <span class="italic text-gray-600">TBD</span>
+      </h3>
+    </section>
+
+    <!-- Word Cloud Section -->
+    <section class="bg-gray-50 rounded-2xl shadow-sm p-6 max-w-6xl mx-auto text-center">
+      <h3 class="text-4xl text-gray-600 font-semibold mb-1">Keywords</h3>
+</section>
+<section>
+      <canvas id="wordcloud-canvas" class="mx-auto" align="centre" width="2000" height="800"></canvas>
+    </section>
+
+
+<!-- WordCloud Scripting -->
+<script>
+  (async function () {
+    const ab = await fetch('research_deepdive.xlsx').then(r => {
+      if (!r.ok) throw new Error('Failed to fetch research_deepdive.xlsx');
+      return r.arrayBuffer();
+    });
+    const wb = XLSX.read(ab, { type: 'array' });
+    const ws = wb.Sheets[wb.SheetNames[0]];
+    const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
+
+    // Build frequency map (case-insensitive)
+    const freqMap = {};
+    rows.forEach(row => {
+      if (!row.keywordslowcase) return;
+      row.keywordslowcase.split(/[,;]+/).forEach(raw => {
+        const word = raw.trim();
+        if (!word) return;
+        freqMap[word] = (freqMap[word] || 0) + 1;
+      });
+    });
+
+    // Sort by count desc
+    const allWords = Object.entries(freqMap)
+      .map(([text, weight]) => [text, Number(weight)])
+      .sort((a, b) => b[1] - a[1]);
+
+    // ✅ Enforce top 10 at the end
+    const topN = 20;
+    const words = allWords.slice(0, topN);
+
+    if (words.length === 0) {
+      console.warn('No keywords found for wordcloud');
+      return;
+    }
+
+    // Scale using only top 10
+    const maxWeight = Math.max(...words.map(w => w[1]));
+
+    // Optional: verify in console
+    console.log('Top 10 words for cloud:', words);
+
+    const colors = [
+      '#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#FF9F40',
+      '#DC143C','#00BFFF','#228B22','#DAA520','#DA70D6',
+      '#FF7F50','#708090','#FF6347','#9370DB','#40E0D0',
+      '#B22222','#6B8E23','#4682B4','#FF69B4','#CD853F',
+      '#F5FFFA','#4169E1','#FFFACD','#8B4513','#2E8B57'
+    ];
+
+    WordCloud(document.getElementById('wordcloud-canvas'), {
+      list: words,                               // ← only the top 10
+      gridSize: 9,
+      weightFactor: size => (size / maxWeight) * 85,
+      fontFamily: 'sans-serif, Helvetica',
+      color: () => colors[Math.floor(Math.random() * colors.length)],
+      rotateRatio: 0.2,                          // 20% rotated (0–1)
+      rotationSteps: 3,
+      shuffle: true,
+      backgroundColor: 'black',
+      ellipticity: 0.9,
+      origin: [400, 400],
+      drawOutOfBound: false,
+      clearCanvas: true
+    });
+  })().catch(err => {
+    console.error('WordCloud generation failed:', err);
+  });
+</script>
+
+
+
+<!-- Research Entries Placeholder -->
+  <div id="research-sections" class="space-y-8 px-6 max-w-4xl mx-auto"></div>
+
+
+<!-- Include SheetJS for XLSX parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+  fetch('research_deepdive.xlsx')
+    .then(res => res.arrayBuffer())
+    .then(ab => {
+      const wb = XLSX.read(ab, { type: 'array' });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
+
+      const container = document.getElementById('research-sections');
+      if (!rows.length) {
+        container.innerText = 'No research data found.';
+        return;
+      }
+
+      // Build one section per row
+      rows.forEach(row => {
+        const html = `
+          <section class="bg-gray-100 rounded-2xl shadow-sm p-6 text-left space-y-2">
+
+            <h2 class="text-xl font-bold text-gray-700">${row.Number}. <a href="${row.Link}" target="_blank"
+               class="hover:underline hover:bg-blue-200">${row.Title}</a> (${row.Year})</h2>
+
+            <p target="_blank"
+               class="block text-sm text-gray-600">
+              ${row.Authors}
+            </p>
+
+            <p class="text-sm text-gray-800">
+            <b>Keywords:</b> ${row.keywordslowcase}
+            </p> 
+            
+            <br>
+            <p class="text-gray-800">
+            <b>Summary:</b> ${row.Summary}
+            </p> 
+
+                  <br>
+                <p class="text-gray-800">
+                  <b>Limitations:</b> ${row.Limitations}
+                </p>
+           
+          </section>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('research-sections')
+              .innerText = 'Failed to load research_deepdive.xlsx';
+    });
+</script>
+
+  </main>
+
+
+  <footer class="text-center text-xs text-gray-300 py-8 border-t border-gray-200 mt-10">
+    © 2025 StillMind. All rights reserved.
+  </footer>
+</body>
+</html>

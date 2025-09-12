@@ -59,7 +59,7 @@ target="_blank" rel="noopener noreferrer">(Vos et al., 2020)</a>.
       <line x1="150" y1="400" x2="90" y2="480" stroke="#FFE4B5" stroke-width="2"/>
       <line x1="210" y1="480" x2="150" y2="400" stroke="#FFE4B5" stroke-width="2"/>
 
-      <line x1="300" y1="300" x2="470" y2="180" stroke="#f44336" stroke-width="2" opacity="0"/> // Upper Quadrant
+      <line x1="300" y1="300" x2="470" y2="180" stroke="#f44336" stroke-width="2" opacity="0"/> // Right Upper Quadrant
       <line x1="470" y1="180" x2="530" y2="100" stroke="#ffab91" stroke-width="2"/>
       <line x1="470" y1="180" x2="410" y2="100" stroke="#ffab91" stroke-width="2"/>
       <!-- (you can extend with more branches for other quadrants later) -->
@@ -166,6 +166,7 @@ target="_blank" rel="noopener noreferrer">(Vos et al., 2020)</a>.
         <circle cx="470" cy="180" r="45" fill="#f44336"/>
         <text x="470" y="170" text-anchor="middle" class="fill-white text-sm font-semibold">Apps
       <tspan x="465" dy="40" font-size="32" aria-label="research" role="img">📲</tspan></text>
+
       </a>
 
       <a href="artist.html">
@@ -177,10 +178,28 @@ target="_blank" rel="noopener noreferrer">(Vos et al., 2020)</a>.
         <circle cx="410" cy="100" r="45" fill="#ffab91"/>
         <text x="410" y="85" text-anchor="middle" class="fill-gray-700 text-xs">App</text>
         <text x="410" y="100" text-anchor="middle" class="fill-gray-700 text-xs">Development
-        <tspan x="410" dy="34" font-size="35" aria-label="money" role="img">🚀</tspan></text>
+        <tspan id="rocket" x="410" dy="34" font-size="35" aria-label="money" role="img">🚀</tspan></text>
       </a>
 
-    </svg>
+
+      <!-- Right Lower Quadrant -->
+      <a href="deepdive.html" class="hover:bg-red-900">
+        <circle cx="470" cy="400" r="45" fill="#4ADE80" hover:bg-red-300/>
+        <text x="474" y="390" text-anchor="middle" class="fill-white text-sm font-semibold">Deep Dive
+      <tspan x="470" dy="40" font-size="32" aria-label="research" role="img">🔎📄</tspan></text>
+      </a>
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+<!-- Hovering on Circles/Texts -->
+  <style>
+
+    tspan:hover {
+      font-size: 40px;
+    }
+    
+  </style>
+
   </section>
   </main>
 
